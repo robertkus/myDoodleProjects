@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Basic Arithmetic Website</title>
+        <style type="text/css">
+            #mainHeading {
+                font-size: 25px;
+                font-weight: bold;
+            }
+            #yourAnswer {
+                font-size: 18px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="mainHeading">Welcome to my arithmetic website!</p>
+        <p style= "font-size: 20px">Please enter in any two values below and select the button listed below to perform an operation.</p>
+        <p>1st Number: <input type="number" id="firstInput" min="0.00000000000000000001"></input>
+            <!--Visitors can choose from the operators included in the drop-down list.-->
+             <select id="myList">
+                <option>+</option>
+                <option>-</option>
+                <option>x</option>
+                <option>/</option>
+             </select>
+         2nd Number: <input type="number" id="secondInput" min="0.00000000000000000001"></input></p>
+        <br>
+        <!--This button will calculate the two numbers entered based on the chosen operation.-->
+        <span><button id="calculate">Calculate</button></span>
+        <br>
+        <br>
+        <div><p id="yourAnswer"> </p></div>
+        <!--
+        <div id="nextQuestion">
+            <p>Now, based on that previous answer, please solve the following:</p>
+        </div>
+        -->
+        <script type="text/javascript">
+            document.getElementById("calculate").onclick = function additionFunction() {
+                /* The parseInt() function changes a string value into an integer.
+                   The value method will retrieve the value of the designated item. */
+                var x = parseInt(document.getElementById("firstInput").value);
+                var y = parseInt(document.getElementById("secondInput").value);
+                var z = document.getElementById("myList").value;
+                if (z == "+") {
+                    document.getElementById("yourAnswer").innerHTML = "Here's your answer: " + (x + y) + ". Congratulations!";
+                }
+                else if (z == "-") {
+                    document.getElementById("yourAnswer").innerHTML = "Here's your answer: " + (x - y) + ". Congratulations!";
+                }
+                else if (z == "x") {
+                    document.getElementById("yourAnswer").innerHTML = "Here's your answer: " + (x * y) + ". Congratulations!";
+                }
+                else {
+                    document.getElementById("yourAnswer").innerHTML = "Here's your answer: " + (x / y) + ". Congratulations!";
+                };
+            };
+            /*
+            function nextChallenge () {
+                var myAns = document.getElementById("yourAnswer").value;
+                var nQ = document.getElementById("nextQuestion");
+                if (myAns === " ") {
+                    nQ.style.display = "none";
+                } else {
+                    nQ.style.display = "block";
+                };
+            };
+            */
+        </script>
+    </body>
+</html>
