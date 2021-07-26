@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My GitHub Algebra Course</title>
+        <style type="text/css">
+            body {
+                min-height: 100%;
+                min-width: 100%;
+                background-image: url("https://www.publicdomainpictures.net/pictures/220000/velka/farmers-market-1495206921lwW.jpg");
+            }
+            div {
+                margin: -10px 0px 0px -10px;
+                padding: 5px;
+                box-sizing: border-box;
+                overflow: auto;
+            }
+            #myNavbar {
+                font-size: 25px;
+                font-weight: bold;
+                color: white;
+                text-align: center;
+                background-color:red;
+                padding-bottom: 10px;
+            }
+            #introduction {
+                padding: 0px 10px 5px 10px;
+                border: 1px black solid; 
+                margin-top: -2px;
+                background-color: lightgray;
+            }
+            #scenario {
+                border: 1px black solid;
+                background-color: lightpink;
+                margin-top: -20px;
+                height: 250px;
+                padding: 0px 10px 3px 10px;
+            }
+            .myList {
+                float:left;
+            }
+            #calcOne {
+                height: 40px;
+                width: 60px;
+                background-color: lightskyblue;
+                font-weight: bold;
+                font-style: oblique;
+                float:left;
+                margin-left: 30px;
+                margin-right: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="myNavbar">
+            My GitHub Algebra Course
+        </div>
+
+        <div id="introduction">
+        <h1>I hope you are ready to do some basic Algebra today!</h1>
+        <h3>Please enter in values for two of the three variables listed. Then click the "Solve" button! The equation will solve the value of the variable not filled out.</h3>
+        <p><em>Note: If you attempt to enter no values, one value, or all three and click "Solve", you will get an error message.</em></p>
+        </div>
+
+        <div id="scenario"> 
+        <p style="font-size: 20px"><strong><ins>Scenario:</ins></strong></p><p>You are the owner of a small grocery store called <em>McMichaels Groceries</em>. You wish to know how many items need to be sold, what the price of that item needs to be set to make a desired revenue, and to see how much revenue you would earn from selling a certain number of items at a designated price.</p>
+        <span>A: <input type="number" class="inputBox" id="aVar" min="0" placeholder="Enter number of items"></span> 
+        <span>  X  </span> 
+        <span> B: <input type="number" class="inputBox" id="bVar" min="0" step="0.01" placeholder="Enter price per item ($)"> </span>
+        <span> = C: <input type="number" class="inputBox" id="cVar" min="0" step="0.01" placeholder="Enter in total revenue ($)"></span>
+        <br><br>
+        <ul class="myList">
+            <li>A: Number of items sold.</li>
+            <li>B: Price per item.</li>
+            <li>C: Total Revenue.</li>
+        </ul>
+
+        
+        <br>
+        <div id="ansSection">
+        <button id="calcOne">Solve</button> 
+        <div>
+            <p><strong>Here's your answer: </strong><span id="ansOne"></span></p>
+        </div>
+        </div>
+        </div>
+        <script type="text/javascript">
+            var buttonOne = document.getElementById("calcOne").onclick = function () {
+                var a = document.getElementById("aVar").value;
+                var b = document.getElementById("bVar").value;
+                var c = document.getElementById("cVar").value;
+                var mathArray = [];
+                if (a == "" && b == "" && c == "") {
+                    alert("Please fill out two of the three boxes.");
+                } else if (a != "" && b == "" && c == "") {
+                    alert("Please fill out one more box.");
+                } else if (a == "" && b != "" && c == "") {
+                    alert("Please fill out one more box.");
+                } else if (a == "" && b == "" && c != "") {
+                    alert("Please fill out one more box.");
+                } else if (a != "" && b != "" && c != "") {
+                    alert("Don't fill out all three!");
+                } else if (a % 2 != 0 ) {
+                    alert("Variable A must be a whole number.");
+                } else {
+                    var a = parseInt(a);
+                    var b = (parseFloat(b)).toFixed(2);
+                    var c = (parseFloat(c)).toFixed(2);
+                    /* CODE BELOW USED TO TEST THE IF/ELSE STATEMENTS.
+                    if (a >= 0 && b >= 0) {
+                        alert("Box 1 and 2 filled.");
+                    } else if (b >= 0 && c >= 0) {
+                        alert("Box 2 and 3 filled.");
+                    } else {
+                        alert("Box 1 and 3 filled.");
+                    */
+                    if (a >= 0 && b >= 0) {
+                        mathArray.push(a,b,undefined);
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray;
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray[0] + mathArray[1];
+                    } else if (b >= 0 && c >= 0) {
+                        mathArray.push(undefined,b,c);
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray;
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray[1] + mathArray[2];
+                    } else if (a < 0 || b < 0 || c < 0) {
+                        alert("Please enter positive values!");
+                    } else {
+                        mathArray.push(a,undefined,c);
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray;
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray[0] + mathArray[2];          
+                    };
+                    if (mathArray[0] == undefined) {
+                        document.getElementById("ansOne").innerHTML = "At least " + (Math.ceil((mathArray[2] / mathArray[1]))) + " products must be sold." ;
+                    } else if (mathArray[1] == undefined) {
+                        if ((mathArray[2]) % 1 == 0) {
+                            document.getElementById("ansOne").innerHTML = "$" + ((mathArray[2] / mathArray[0]).toFixed(2)) + " per item.";
+                            } else {
+                            /* The Math.ceil method below rounds the answer to the nearest hundreths decimal place.
+                               (The answer is multiplied by 100, the Math.ceil method is applied, and then the that answer is divided by 100, with the answer fixed to two decimal places). */
+                            document.getElementById("ansOne").innerHTML = "About $" + ((Math.ceil((mathArray[2] / mathArray[0]) * 100 ) / 100).toFixed(2)) + " per item.";
+                        }
+                    } else {
+                        document.getElementById("ansOne").innerHTML = "$" + ((mathArray[0] * mathArray[1]).toFixed(2)) + " is your total revenue.";
+                    };                                  
+                };  
+            };
+        </script>
+    </body>
+</html>
