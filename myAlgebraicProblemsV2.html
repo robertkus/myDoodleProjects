@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My GitHub Algebra Course V2</title>
+        <style type="text/css">
+            html, body {
+                margin: 0px;
+                padding: 0px;
+                background-image: url("https://th.bing.com/th/id/OIP.mmXniWjCSOcmN0Y-wOOUAQHaFL?w=249&h=180&c=7&o=5&dpr=1.25&pid=1.7");
+                max-width: 100%;
+                max-height: 100%
+            }
+            div {
+                box-sizing: border-box;
+                overflow: auto;
+                text-align: center;
+                clear: none;
+                margin: 0px;
+                padding: 0px;
+            }
+            #myHeader {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bolder;
+                color: white;
+                background-color: green;
+            }
+            #introduction {
+                background-color: lightgrey;
+            }
+            #stepList {
+                text-align:left;
+                font-size: 16px;
+                padding-left: 10px;
+                width: 500px;
+                background-color: white;
+            }
+            .inputBox {
+                border-radius: 5%;
+            }
+            select{
+                height: 50px;
+                width: 50px;
+                margin-left: 15px;
+                font-size: 30px;
+                font-weight: bold;
+                background-color:rgb(26, 250, 201);
+                border-radius:25%;
+            }
+            .sectionHead {
+                height: 60px;
+                width: 50%;
+                text-align: center;
+                font-weight: bold;
+                background-color:thistle;
+                font-size: 25px;
+                border: 1px none black;
+                border-top-style: solid;
+                overflow:hidden;
+                float:left;
+            }
+            #secHeadOne {
+                border-right-style: solid;
+            }
+            #secHeadTwo {
+                border-left-style: solid;
+            }
+            #calculation {
+                margin: 0px;
+                font-size: 15px;
+                border: 1px none black;
+                border-top-style: solid;
+                border-left-style: solid;
+                padding: 10px;
+                height: 400px;
+                width: 50%;
+                background-color:lightblue;
+                float: left;
+            }
+            #yourAnswer {
+                margin: 0px;
+                border: 1px none black;
+                border-top-style: solid;
+                border-left-style: solid;
+                background-color: yellowgreen;
+                height: 400px;
+                width: 50%;
+                padding: 10px;
+                text-align: left;
+                float: left;
+            }
+            #calcOne {
+                height: 40px;
+                width: 160px;
+                font-size: 18px;
+                background-color:rgb(26, 250, 201);
+                border-radius: 5%;
+            }
+            .yourResult {
+                border: 1px solid black;
+                font-size: 18px;
+                margin-left: 15px;
+                height: 30px;
+                font-weight:bold;
+                width: 250px;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <!--
+        <div id="contentTable"></div>
+        -->
+        <div id="myHeader">My GitHub Algebra Course V2</div>
+
+        <div id="introduction">
+        <h1>Welcome to my advance Algebra Web Tool!</h1>
+        <h3>Please enter in values for two of the three items listed below. Then click the "Calculate" button!</h3>
+        <h5>The equation will solve the value of the item not filled out.</h5>
+        </div>
+        <div id="stepList">
+        <p>Steps for entering in an equation: </p>
+        <ul>
+            <li>Step 1: Enter in a number for variable <b>A</b>.</li>
+            <li>Step 2: Select an operation from the drop-down list.</li>
+            <li>Step 3: Enter in a number for variable <b>B</b>.</li>
+            <li>Step 4: Enter in a number for variable <b>C</b>.</li>
+            <li>Step 5: Click <b>Calculate</b>!</li>
+        </ul>
+        <p><em>Remember to enter in values for just two variables.</em></p>
+    </div>
+        <div id="myMathImage">
+            
+        </div>
+        <div class="sectionHead" id="secHeadOne"><p>Part 1: Calculation Section</p></div>
+        <div class="sectionHead" id="secHeadTwo"><p>Part 2: Results Section</p></div>
+        <div id="calculation">
+        <span>A: <input type="number" class="inputBox" id="aVar" placeholder="Enter value here."></span>
+        <br>
+        <br> 
+        <span style="font-size:18px">Operation:</span> 
+        <span><select id="myList">
+            <option>+</option>
+            <option>-</option>
+            <option>x</option>
+            <option>/</option>
+            <option>^</option>
+         </select></span> 
+        <br>
+        <br>
+        <span>B: <input type="number" class="inputBox" id="bVar" placeholder="Enter value here."> </span>
+        <br>
+        <br>
+        <span style="font-size: 20px"> <strong> = </strong> </span>
+        <br>
+        <br>
+        <span>C: <input type="number" class="inputBox" id="cVar" placeholder="Enter value here."></span>
+        <br>
+        <br>
+        <br>
+        <button id="calcOne">Calculate:</button> 
+        </div>
+        <span><div id="yourAnswer">
+            <p>The equation you entered: </p>
+            <div class="yourResult" id="equationOne"></div>
+            <br>
+            <p>Here's your answer: </p>
+            <div class="yourResult" id="ansOne"></div>
+        </div></span>
+        <script type="text/javascript">
+            var buttonOne = document.getElementById("calcOne").onclick = function () {
+                var a = document.getElementById("aVar").value;
+                var b = document.getElementById("bVar").value;
+                var c = document.getElementById("cVar").value;
+                var z = document.getElementById("myList").value;
+                var mathArray = [];
+                if (a == "" && b == "" && c == "") {
+                    alert("Please fill out two of the three boxes.");
+                } else if (a != "" && b == "" && c == "") {
+                    alert("Please fill out one more box.");
+                } else if (a == "" && b != "" && c == "") {
+                    alert("Please fill out one more box.");
+                } else if (a == "" && b == "" && c != "") {
+                    alert("Please fill out one more box.");
+                } else if (a != "" && b != "" && c != "") {
+                    alert("Don't fill out all three!");
+                } else {
+                    var a = parseFloat(a);
+                    var b = parseFloat(b);
+                    var c = parseFloat(c);
+                    /* CODE BELOW USED TO TEST THE IF/ELSE STATEMENTS.
+                    if (a >= 0 && b >= 0) {
+                        alert("Box 1 and 2 filled.");
+                    } else if (b >= 0 && c >= 0) {
+                        alert("Box 2 and 3 filled.");
+                    } else {
+                        alert("Box 1 and 3 filled.");
+                    */
+                    if (a >= 0 && b >= 0) {
+                        mathArray.push(a,b,undefined);
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray;
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray[0] + mathArray[1];
+                    } else if (b >= 0 && c >= 0) {
+                        mathArray.push(undefined,b,c);
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray;
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray[1] + mathArray[2];
+                    } else {
+                        mathArray.push(a,undefined,c);
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray;
+                        // TEST -->   document.getElementById("ansOne").innerHTML = mathArray[0] + mathArray[2];          
+                    };
+                    var aa = mathArray[0];
+                    var bb = mathArray[1];
+                    var cc = mathArray[2];
+                    if (aa == undefined) {
+                        document.getElementById("equationOne").innerHTML = "A" + " " + z + " " + bb + " = " + cc;
+                    // if (mathArray[0] == undefined) {
+                        if (z == "+") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[2] - mathArray[1];
+                            document.getElementById("ansOne").innerHTML = cc - bb;
+                        } else if (z == "-") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[2] + mathArray[1];
+                            document.getElementById("ansOne").innerHTML = cc + bb;
+                        } else if (z == "x") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[2] / mathArray[1];
+                            document.getElementById("ansOne").innerHTML = cc / bb;
+                        } else if (z == '/') {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[2] * mathArray[1];
+                            document.getElementById("ansOne").innerHTML = cc * bb;
+                        } else {
+                            document.getElementById("ansOne").innerHTML =  cc ** (1/b);
+                        };
+                    // } else if (mathArray[1] == undefined) {
+                    } else if (bb == undefined) {
+                        document.getElementById("equationOne").innerHTML = aa + " " + z + " " + "B" + " = " + cc;
+                        if (z == "+") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[2] - mathArray[0];
+                            document.getElementById("ansOne").innerHTML = cc - aa;
+                        } else if (z == "-") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = - (mathArray[2] - mathArray[0]);
+                            document.getElementById("ansOne").innerHTML = - (cc - aa);
+                        } else if (z == "x") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[2] / mathArray[0];
+                            document.getElementById("ansOne").innerHTML = cc / aa;
+                        } else if (z == '/') {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[0] / mathArray[2];
+                            document.getElementById("ansOne").innerHTML = aa / cc;
+                        } else {
+                            document.getElementById("ansOne").innerHTML = Math.round((Math.log(cc)/Math.log(aa))*1000)/1000;
+                        };
+                    } else /* if (mathArray[2] == undefined) */ {
+                        document.getElementById("equationOne").innerHTML = aa + " " + z + " " + bb + " = C";
+                        if (z == "+") {
+                             // TEST --> document.getElementById("ansOne").innerHTML = mathArray[0] + mathArray[1];
+                             document.getElementById("ansOne").innerHTML = aa + bb;
+                        } else if (z == "-") {
+                            // TEST --> document.getElementById("ansOne").innerHTML = mathArray[0] - mathArray[1];
+                            document.getElementById("ansOne").innerHTML = aa - bb;
+                        } else if (z == "x") {
+                            // TEST -->document.getElementById("ansOne").innerHTML = mathArray[0] * mathArray[1];
+                            document.getElementById("ansOne").innerHTML = aa * bb;
+                        } else if (z == '/') {
+                            //TEST --> document.getElementById("ansOne").innerHTML = mathArray[0] / mathArray[1];
+                            document.getElementById("ansOne").innerHTML = aa / bb;
+                        } else {
+                            document.getElementById("ansOne").innerHTML = aa ** bb;
+                        };
+                    };                                  
+                };  
+            };
+        </script>
+    </body>
+</html>
